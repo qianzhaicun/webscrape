@@ -1,0 +1,9 @@
+from login import login, parse_form
+import requests
+session = requests.Session()
+COUNTRY_URL = 'http://example.webscraping.com/places/default/edit/United-Kingdom-239'
+response, session = login(session=session)
+country_html = session.get(COUNTRY_URL)
+data = parse_form(country_html.content)
+data['population'] = int(data['population']) + 1
+response = session.post(COUNTRY_URL, data)

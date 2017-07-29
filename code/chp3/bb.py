@@ -1,0 +1,4 @@
+from urllib.parse import urlsplit
+components = urlsplit('http://example.webscraping.com/places/default/view/Afghanistan-1')
+print(components)
+print(components.netloc)

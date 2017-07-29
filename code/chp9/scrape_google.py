@@ -1,0 +1,32 @@
+import requests
+from urllib.parse import parse_qs, urlparse
+from lxml.html import fromstring
+
+# get results from search
+#html = requests.get('https://www.google.com/search?q=test')
+html = requests.get('https://www.so.com/s?q=q')
+tree = fromstring(html.content)
+
+results = tree.cssselect('h3.res-title a')
+print('1')
+print(results)
+
+# grab the first link
+link = results[0].get('href')
+print(link)
+
+
+qs = urlparse(link).query
+parsed_qs = parse_qs(qs)
+print(parsed_qs)
+
+# as one list
+links = []
+for result in results:
+    link = result.get('href')
+    links.append(link)
+    
+print(links)
+print(len(links))
+
+
